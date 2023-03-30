@@ -11,7 +11,7 @@ datasource db {
 }
 
 
-model Product {
+model product {
   id    Int      @default(autoincrement()) @id
   name  String
   desc  String?

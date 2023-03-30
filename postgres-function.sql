@@ -1,0 +1,14 @@
+CREATE OR REPLACE FUNCTION apply_discount() 
+RETURNS TRIGGER AS 
+$$
+BEGIN
+  NEW.price = NEW.price * 0.9;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER discount_trigger
+BEFORE INSERT ON product
+FOR EACH ROW
+WHEN (NEW.stock > 100)
+EXECUTE FUNCTION apply_discount();
